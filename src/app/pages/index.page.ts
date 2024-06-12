@@ -4,43 +4,50 @@ import { Component, signal } from '@angular/core';
   selector: 'app-home',
   standalone: true,
   template: `
-    <div>
-      <a href="https://analogjs.org/" target="_blank">
-        <img alt="Analog Logo" class="logo analog" src="/analog.svg" />
-      </a>
-    </div>
-
-    <h2>Analog</h2>
-
-    <h3>The fullstack meta-framework for Angular!</h3>
-
-    <div class="card">
-      <button type="button" (click)="increment()">Count {{ count() }}</button>
-    </div>
-
-    <p class="read-the-docs">
-      For guides on how to customize this project, visit the
-      <a href="https://analogjs.org" target="_blank">Analog documentation</a>
-    </p>
+    <main class="flex w-full flex-col items-center justify-center gap-2">
+      <h1 class="text-center text-3xl font-bold underline">Analog Test App</h1>
+      <p
+        class="flex size-8 w-fit items-center justify-center rounded bg-slate-950 p-2 text-center font-mono text-white"
+      >
+        {{ count() }}
+      </p>
+      <div class="flex items-center justify-center space-x-2">
+        <button
+          (click)="increment()"
+          class="flex size-8 items-center justify-center rounded bg-sky-500 p-2 text-white"
+        >
+          +
+        </button>
+        <button
+          (click)="decrement()"
+          class="flex size-8 items-center justify-center rounded bg-sky-500 p-2 text-white"
+        >
+          -
+        </button>
+      </div>
+      <a
+        href="/imprint"
+        class="rounded bg-rose-500 p-2 font-semibold text-white hover:underline"
+        >Imprint</a
+      >
+      <a
+        href="/about"
+        class="rounded bg-rose-500 p-2 font-semibold text-white hover:underline"
+        >About</a
+      >
+    </main>
   `,
-  styles: [
-    `
-      .logo {
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .read-the-docs {
-        color: #888;
-      }
-    `,
-  ],
+  imports: [],
 })
 export default class HomeComponent {
   count = signal(0);
 
   increment() {
     this.count.update((count) => count + 1);
+  }
+  decrement() {
+    if (this.count() > 0) {
+      this.count.update((count) => count - 1);
+    }
   }
 }

@@ -11,7 +11,18 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [analog()],
+  plugins: [
+    analog({
+      // ssr: false,
+      static: true,
+      prerender: {
+        routes: async () => ['/', '/imprint', '/about'],
+        sitemap: {
+          host: 'https://example.com/',
+        },
+      },
+    }),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
